@@ -1,1 +1,242 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+::selection {
+  color: #8ce2ff;
+  background-color: #F25100;
+}
+
+body {
+  margin: 0;
+  background-color: #8ce2ff;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  word-break: keep-all;
+}
+
+body.sub {
+  background-color: #ffffff;
+}
+
+body a {
+  text-decoration: none;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  color: #f25100;
+  box-sizing: border-box;
+  height: 100%;
+  border-right: 1px solid #f25100;
+}
+
+.left h1 {
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid #f25100;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.left h1 span {
+  display: inline-block;
+  color: #f25100;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.diamond-colon {
+  width: 7px;
+  height: 18px;
+  margin-left: 8px;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.diamond-colon::before,
+.diamond-colon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background-color: #f25100;  /* 원하는 색상 */
+  transform: translateX(-50%) rotate(45deg);
+}
+
+/* 위쪽 다이아몬드 */
+.diamond-colon::before {
+  top: 0;
+}
+
+/* 아래쪽 다이아몬드 */
+.diamond-colon::after {
+  bottom: 0;
+}
+
+.header {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.header li {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  color: #f25100;
+  padding: 10px 20px;
+  border-bottom: 1px solid #f25100;
+}
+
+.header li a {
+  color: #f25100;
+  display: block;
+}
+
+.header li:hover {
+  background-color: #f25100;
+}
+
+.header li:hover a {
+  color: #8ce2ff;
+}
+
+.header.sub li:hover {
+  background-color: #8ce2ff;
+}
+
+.header.sub li:hover a {
+  color: #f25100;
+}
+
+.header.sub li.on {
+  background-color: #8ce2ff;
+}
+
+.footer {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 300;
+  margin-top: auto;
+  width: 100%;
+  list-style: none;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.footer p {
+ margin: 0 0 24px 0; 
+}
+
+.footer p span {
+  letter-spacing: -0.025em;
+  display: block;
+}
+
+.footer ul.link-icon {
+  display: flex;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer ul.link-icon li{
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.footer ul.link-icon li a {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.right {
+  padding: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); /* 최소 32px */
+  grid-gap: 8px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.square {
+  background-color: #8ce2ff;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  position: relative;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  animation-name: colorFlip;
+  animation-duration: 12s;  /* 전체 애니메이션 시간 */
+  animation-timing-function: steps(2, end); /* 2단계로 딱 끊기게 */
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes colorFlip {
+  0%, 50% {
+    background-color: #8ce2ff;
+  }
+  51%, 100% {
+    background-color: #f25100;
+  }
+}
+
+.square.hover {
+  background-color: #8ce2ff !important;
+  border-color: #f25100;  /* 투명→주황색 단일 컬러 전환 */
+  transform: rotate(45deg) scale(0.9);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* 내부 작은 마름모 박스 크기를 85%로 변경 */
+.square.hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 85%;  /* 가로 85% */
+  height: 85%; /* 세로 85% */
+  background-color: #f25100;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-sizing: border-box;
+  border-radius: 2px;
+  pointer-events: none;
+}
