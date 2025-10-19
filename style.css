@@ -31,6 +31,12 @@ body a {
   box-sizing: border-box;
 }
 
+.main-container .main-background {
+  background-image: url('images/hero.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .left {
   display: flex;
   flex-direction: column;
