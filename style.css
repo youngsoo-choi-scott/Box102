@@ -127,17 +127,17 @@ body a {
 }
 
 .right {
-  padding: 15px;
+  padding: 40px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
 
 /* About */
 .about-contents {
   width: 100%;
-  margin: 40px;
   display: flex;
   gap: 20px;
   color: #6c6500;
