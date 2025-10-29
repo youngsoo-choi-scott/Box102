@@ -156,6 +156,10 @@ body a {
   line-height: 1.4;
 }
 
+.about-title span {
+  display: block;
+}
+
 .about-text {
   width: 50%;
   font-size: 16px; 
