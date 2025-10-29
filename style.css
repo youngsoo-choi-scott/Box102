@@ -65,8 +65,10 @@ body a {
 
 .header {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 30px;
 }
 
 .header li {
@@ -100,30 +102,6 @@ body a {
 .footer p span {
   letter-spacing: -0.025em;
   display: block;
-}
-
-.footer ul.link-icon {
-  display: flex;
-  gap: 12px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.footer ul.link-icon li{
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.footer ul.link-icon li a {
-  display: inline-flex;
-  width: 24px;
-  height: 24px;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: inherit;
 }
 
 .right {
