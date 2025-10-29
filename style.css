@@ -30,16 +30,13 @@ body a {
   grid-template-columns: 23.5% 76.5%;
   height: 100vh;
   box-sizing: border-box;
-}
-
-.main-background {
   background-color: #4E74B3;
 }
 
 .main-background {
   background-image: url('images/hero.jpg');
   background-repeat: no-repeat;
-  background-size: 120%;
+  background-size: cover;
   opacity: 0;
   animation: fadeIn 1.5s ease-out forwards;
 }
@@ -51,10 +48,6 @@ body a {
   100% {
     opacity: 1;
   }
-}
-
-.about-background {
-  background-color: #482D80;
 }
 
 .left {
@@ -136,6 +129,11 @@ body a {
 
 
 /* About */
+
+.about-background {
+  background-color: #482D80;
+}
+
 .about-contents {
   width: 100%;
   display: flex;
