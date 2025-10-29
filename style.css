@@ -12,7 +12,7 @@
 
 body {
   margin: 0;
-  background-color: #463526;
+  background-color: #ffffff;
   height: 100vh;
   overflow: hidden;
   font-family: Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
@@ -67,42 +67,19 @@ body a {
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 100%;
 }
 
 .header li {
-  font-size: 32px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.025em;
-  color: #f25100;
-  padding: 10px 20px;
-  border-bottom: 1px solid #f25100;
+  
 }
 
 .header li a {
-  color: #f25100;
   display: block;
+  font-size: 0;
 }
 
 .header li:hover {
-  background-color: #f25100;
-}
-
-.header li:hover a {
-  color: #8ce2ff;
-}
-
-.header.sub li:hover {
-  background-color: #8ce2ff;
-}
-
-.header.sub li:hover a {
-  color: #f25100;
-}
-
-.header.sub li.on {
-  background-color: #8ce2ff;
+  background-color: #33DDFF;
 }
 
 .footer {
