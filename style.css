@@ -33,21 +33,15 @@ body a {
 }
 
 .main-background {
+  background-color: #4E74B3;
+}
+
+.main-background {
   background-image: url('images/hero.jpg');
   background-repeat: no-repeat;
   background-size: 120%;
-  background-color: #4E74B3;
   opacity: 0;
-  animation: zoomOut 1.5s ease-out forwards, fadeIn 1.5s ease-out forwards;
-}
-
-@keyframes zoomOut {
-  0% {
-    background-size: 120%;
-  }
-  100% {
-    background-size: cover;
-  }
+  animation: fadeIn 1.5s ease-out forwards;
 }
 
 @keyframes fadeIn {
