@@ -56,8 +56,6 @@ body a {
 .left h1 {
   margin: 0;
   padding: 40px 40px 48px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .left h1 a{
@@ -71,8 +69,6 @@ body a {
   flex-direction: column;
   gap: 20px;
   padding-left: 30px;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .header li {
