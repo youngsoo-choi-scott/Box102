@@ -20,10 +20,6 @@ body {
   word-break: keep-all;
 }
 
-body.sub {
-  background-color: #ffffff;
-}
-
 body a {
   text-decoration: none;
 }
@@ -39,6 +35,11 @@ body a {
   background-image: url('images/hero.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #4E74B3;
+}
+
+.about-background {
+  background-color: #482D80;
 }
 
 .left {
