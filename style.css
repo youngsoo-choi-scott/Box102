@@ -1,5 +1,10 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 ::selection {
   color: #ffffff;
   background-color: #463526;
@@ -43,27 +48,19 @@ body a {
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  color: #f25100;
+  color: #ffffff;
   box-sizing: border-box;
   height: 100%;
-  border-right: 1px solid #f25100;
 }
 
 .left h1 {
-  width: 100%;
   margin: 0;
-  border-bottom: 1px solid #f25100;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 40px 40px 48px;
 }
 
-.left h1 span {
-  display: inline-block;
-  color: #f25100;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
+.left h1 a{
+  display: block;
+  font-size: 0;
 }
 
 .header {
