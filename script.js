@@ -107,3 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 75); // transition 시간과 동일하게 설정
     });
   });
+
+
+
+  // 모바일 헤더
+  /* JavaScript 함수: 메뉴 열기/닫기 */
+  function toggleMenu() {
+    const overlay = document.getElementById('menuOverlay');
+    const navbar = document.querySelector('.navbar');
+
+    // overlay 열리고 닫힘 상태 토글
+    if (overlay.classList.contains('open')) {
+    overlay.classList.remove('open');
+    navbar.classList.remove('active');
+    } else {
+    overlay.classList.add('open');
+    navbar.classList.add('active');
+    }
+  }
