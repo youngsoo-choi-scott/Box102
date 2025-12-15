@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  fetch('left.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('left').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Left load failed:', error);
+      });
+
+
   // 탭 메뉴 기능
   const tabs = document.querySelectorAll('.tab-menu li');
   const contents = document.querySelectorAll('.tab-content');

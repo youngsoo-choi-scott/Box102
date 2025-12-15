@@ -36,13 +36,7 @@ body {
   word-break: keep-all;
   letter-spacing: -0.025em;
   background-color: #463526;
-  /* opacity: 0;
-  transition: opacity 0.5s ease-in-out; */
 }
-
-/* body.loaded {
-    opacity: 1;
-  } */
 
 body a {
   text-decoration: none;
@@ -64,6 +58,15 @@ body a {
   animation: fadeIn 1.5s ease-out forwards;
 }
 
+@media (max-width: 720px) {
+  .main-background {
+    background-image: url('images/hero_m.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -82,6 +85,12 @@ body a {
   color: #ffffff;
   box-sizing: border-box;
   height: 100%;
+}
+
+@media (max-width: 720px) {
+  .left {
+    display: none; 
+  }
 }
 
 .left h1 {
@@ -157,6 +166,7 @@ body a {
 .ovh {
   overflow: hidden;
 }
+
 
 /* About */
 
@@ -484,7 +494,34 @@ body a {
   position: relative;
 }
 
-.gallery-list-item ul li.thumbnail img{
+.gallery-list-item ul li.thumbnail p {
+  font-size: 14px;
+  font-weight: 300;
+  background-color: #463526;
+  color: #f5f5f7;
+  padding: 8px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 25%;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.gallery-list-item ul li.thumbnail p.upcoming {
+  background-color: #463526;
+}
+
+.gallery-list-item ul li.thumbnail p.ongoing {
+  background-color: #482D80;
+}
+
+.gallery-list-item ul li.thumbnail p.ended {
+  background-color: #A4A4B2;
+}
+
+.gallery-list-item ul li.thumbnail img {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -575,10 +612,25 @@ body a {
   font-weight: 500;
   line-height: 1.25;
   margin-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .work-title span {
   display: block;
+}
+
+.work-title .back-btn {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.025em;
+  color: #453526;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .work-hero {
