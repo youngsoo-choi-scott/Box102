@@ -13,6 +13,7 @@
 /* 스크롤바 스타일링 */
 ::-webkit-scrollbar {
   width: 4px; /* 스크롤바의 두께 */
+  height: 4px;
 }
 
 ::-webkit-scrollbar-track {
@@ -35,6 +36,7 @@ body {
   font-size: 16px;
   word-break: keep-all;
   letter-spacing: -0.025em;
+  background-color: #463526;
 }
 
 body a {
@@ -229,6 +231,7 @@ body a {
 
   .about-text {
     width: 100%;
+    font-size: 18px;
     margin-bottom: 20px;
   }
 }
@@ -318,6 +321,52 @@ body a {
   width: 100%;
   height: auto;
 }
+
+@media (max-width: 720px) {
+  .cafe-contents {
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 20px;
+  }
+
+  .cafe-title {
+    width: 100%;
+  }
+
+  .cafe-title span {
+    display: inline-block;
+  }
+
+  .cafe-text {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .cafe-menu {
+    padding-top: 60px;
+    flex-direction: column;
+  }
+
+  .cafe-menu img {
+    width: 100%;
+  }
+
+  .cafe-map {
+    margin-top: 60px;
+    overflow: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .cafe-map img {
+    width: 200%;
+  }
+
+  .cafe-visual img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+}
+
 
 /* Gallery */
 
@@ -612,6 +661,74 @@ body a {
  width: auto;
 }
 
+@media (max-width: 720px) {
+  .tab-menu {
+    justify-content: space-between;
+  }
+
+  .tab-menu li {
+    font-size: 24px;
+    margin-right: 0;
+  }
+
+  .gallery-contents {
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .gallery-title {
+    width: 100%;
+  }
+
+  .gallery-title span {
+    display: inline-block;
+  }
+
+  .gallery-text {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .gallery-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .gallery-subtitle {
+    width: 100%;
+    font-size: 22px;
+  }
+
+  .gallery-list-row {
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .gallery-list-item {
+    width: 100%;
+  }
+
+  .gallery-list-item ul li.title {
+    font-size: 22px;
+  }
+
+  .gallery-list-item ul li.name,
+  .gallery-list-item ul li.date {
+    font-size: 18px;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .pagination li {
+    font-size: 22px;
+    margin-right: 12px;
+  }
+}
+
 
 /* Gallery-Work */
 
@@ -732,6 +849,52 @@ body a {
   object-fit: cover;
 }
 
+@media (max-width: 720px) {
+  .work-title .back-btn {
+    display: none;
+  }
+
+  .work-hero img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .work-data {
+    flex-direction: column;
+    gap: 40px;
+    font-size: 18px;
+    margin-bottom: 60px;
+  }
+
+  .work-data table {
+    width: 100%;
+  }
+
+  .work-data p {
+    width: 100%;
+  }
+
+  .work-data tbody {
+    gap: 16px;
+  }
+
+  .work-data th {
+    width: 50%;
+  }
+
+  .work-data td {
+    width: 50%;
+  }
+
+  .work-thumb-list ul {
+    flex-direction: column;
+  }
+
+  .work-thumb-list ul li {
+    width: 100%;
+  }
+}
+
 
 /* Another */
 
@@ -812,6 +975,38 @@ ul li.insta::before {
 
 .another-text ul li a:hover{
   text-decoration: underline;
+}
+
+@media (max-width: 720px) {
+  .another-contents {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .another-title {
+    width: 100%;
+    font-size: 32px;
+  }
+
+  .another-text {
+    width: 100%;
+    font-size: 22px;
+  }
+
+  .another-text ul li.web,
+  .another-text ul li.insta{
+    padding-left: 36px;
+  }
+
+  ul li.web::before {
+    width: 32px;
+    height: 32px;
+  }
+
+  ul li.insta::before {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 
