@@ -355,6 +355,7 @@ body a {
     margin-top: 60px;
     overflow: auto;
     aspect-ratio: 16 / 9;
+    margin-bottom: 20px;
   }
 
   .cafe-map img {
@@ -364,6 +365,10 @@ body a {
   .cafe-visual img {
     aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  .cafe-visual.mb0 {
+    margin-bottom: 20px;
   }
 }
 
@@ -886,6 +891,10 @@ body a {
     width: 50%;
   }
 
+  .work-thumb-list {
+    margin-bottom: 20px;
+  }
+
   .work-thumb-list ul {
     flex-direction: column;
   }
@@ -969,11 +978,11 @@ ul li.insta::before {
   background: url('images/another_li_icon_insta.svg') no-repeat center / contain;
 }
 
-.another-text ul li a{
+.another-text ul li a {
   color: #482D80;
 }
 
-.another-text ul li a:hover{
+.another-text ul li a:hover {
   text-decoration: underline;
 }
 
@@ -1006,6 +1015,12 @@ ul li.insta::before {
   ul li.insta::before {
     width: 32px;
     height: 32px;
+  }
+
+  .another-text ul li a p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
