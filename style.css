@@ -35,7 +35,6 @@ body {
   font-size: 16px;
   word-break: keep-all;
   letter-spacing: -0.025em;
-  background-color: #463526;
 }
 
 body a {
@@ -174,7 +173,7 @@ body a {
 
   .right {
     padding: 20px;
-    margin-top: 20%;
+    margin-top: 25%;
   }
 }
 
@@ -221,6 +220,7 @@ body a {
 @media (max-width: 720px) {
   .about-contents {
     flex-direction: column;
+    gap: 40px;
   }
 
   .about-title {
@@ -229,6 +229,7 @@ body a {
 
   .about-text {
     width: 100%;
+    margin-bottom: 20px;
   }
 }
 
