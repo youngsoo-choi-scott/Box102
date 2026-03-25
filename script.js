@@ -125,3 +125,65 @@ document.addEventListener('DOMContentLoaded', () => {
     navbar.classList.add('active');
     }
   }
+
+
+
+//
+(function () {
+  const emailEl = document.getElementById('email-copy');
+  const toastEl = document.getElementById('toast');
+  const email = 'box102design@gmail.com';
+
+  function showToast(message) {
+    if (!toastEl) return alert(message);
+    toastEl.textContent = message;
+    toastEl.style.display = 'block';
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => {
+      toastEl.style.display = 'none';
+    }, 1800);
+  }
+
+  async function copyEmail() {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = email;
+        tempInput.setAttribute('readonly', '');
+        tempInput.style.position = 'absolute';
+        tempInput.style.left = '-9999px';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+      showToast('이메일이 복사되었습니다.');
+    } catch (e) {
+      console.error(e);
+      showToast('복사에 실패했습니다. 길게 눌러 복사하세요.');
+    }
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      copyEmail();
+    }
+  }
+
+  if (emailEl) {
+    emailEl.addEventListener('click', copyEmail);
+    emailEl.addEventListener('keydown', handleKeydown);
+  } else {
+    // 요소가 아직 안 만들어진 경우 대비
+    document.addEventListener('DOMContentLoaded', () => {
+      const el = document.getElementById('email-copy');
+      if (el) {
+        el.addEventListener('click', copyEmail);
+        el.addEventListener('keydown', handleKeydown);
+      }
+    });
+  }
+})();

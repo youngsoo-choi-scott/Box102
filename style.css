@@ -158,6 +158,39 @@ body a {
   display: block;
 }
 
+.footer a {
+  color: #ffffff;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+#email-copy {
+  cursor: pointer;
+}
+
+#email-copy .email-copy {
+  display: inline;
+}
+
+#email-copy .email-copy:hover {
+  text-decoration: underline;
+}
+
+#toast {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  right: 40px;
+  bottom: 40px;
+  background: #33DDFF;
+  color: #463526;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 .right {
   padding: 40px;
   box-sizing: border-box;
