@@ -96,17 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('loaded');
   });
 
-  // 링크 클릭 시 opacity를 0으로 전환 후 실제 페이지 이동
-  document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const href = this.href;
-      document.body.classList.remove('loaded'); // opacity 1 -> 0
-      setTimeout(() => {
-        window.location.href = href;
-      }, 75); // transition 시간과 동일하게 설정
-    });
+// 링크 클릭 시 opacity를 0으로 전환 후 실제 페이지 이동
+document.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', function(e) {
+  if (this.target === '_blank') return; // 새 탭은 그대로
+  e.preventDefault();
+  const href = this.href;
+  document.body.classList.remove('loaded');
+  setTimeout(() => {
+    window.location.href = href;
+  }, 75);
   });
+});
 
 
 
