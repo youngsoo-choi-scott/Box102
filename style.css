@@ -124,7 +124,12 @@ body a {
 }
 
 .header li:hover {
-  background-color: #33DDFF;
+  /* background-color: #33DDFF;  */
+  background-color: #ffe4bf;
+}
+
+.header li:hover path {
+  fill: #463526;
 }
 
 .header li path {
@@ -1044,6 +1049,19 @@ ul li.insta::before {
 
 .another-text ul li a:hover {
   text-decoration: underline;
+}
+
+.another-text ul li a::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-left: 2px;
+  vertical-align: middle;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g clip-path='url(%23clip0_1593_568)'><path d='M7 7H14M14 7V14M14 7L7 14' stroke='%23482D80' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></g><defs><clipPath id='clip0_1593_568'><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
 }
 
 @media (max-width: 720px) {
