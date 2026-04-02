@@ -188,3 +188,25 @@ link.addEventListener('click', function(e) {
     });
   }
 })();
+
+
+
+// 카페 슬라이더
+const slider = document.querySelector('.slider');
+const track = document.querySelector('.slider-track');
+
+let position = 0;  // 현재 위치
+const speed = 0.5; // 자동 이동 속도 (px/frame)
+let animationId;
+
+function animate() {
+  position -= speed;
+  // 오른쪽 끝에 다다르면 처음으로 되돌리기 (무한 반복 효과)
+  if (position <= -track.scrollWidth / 2) {
+    position = 0;
+  }
+  track.style.transform = `translateX(${position}px)`;
+  animationId = requestAnimationFrame(animate);
+}
+
+animate();
