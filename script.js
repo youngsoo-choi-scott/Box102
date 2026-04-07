@@ -192,21 +192,150 @@ link.addEventListener('click', function(e) {
 
 
 // 카페 슬라이더
-const slider = document.querySelector('.slider');
-const track = document.querySelector('.slider-track');
+(function() {
+  const visual = document.querySelector('.cafe-visual');
+  const track = visual.querySelector('.slider-track');
+  const slides = Array.from(track.children);
+  const prevBtn = visual.querySelector('.nav.prev');
+  const nextBtn = visual.querySelector('.nav.next');
 
-let position = 0;  // 현재 위치
-const speed = 0.5; // 자동 이동 속도 (px/frame)
-let animationId;
+  let index = 0;
+  const last = slides.length - 1;
 
-function animate() {
-  position -= speed;
-  // 오른쪽 끝에 다다르면 처음으로 되돌리기 (무한 반복 효과)
-  if (position <= -track.scrollWidth / 2) {
-    position = 0;
+  // 드래그 상태
+  let dragging = false;
+  let startX = 0;
+  let deltaX = 0;
+  const THRESHOLD = 50; // 민감도(픽셀)
+  let activePointerId = null; // 캡처 해제용
+
+  function setTransition(on) {
+    track.style.transition = on ? 'transform 0.35s ease' : 'none';
   }
-  track.style.transform = `translateX(${position}px)`;
-  animationId = requestAnimationFrame(animate);
-}
 
-animate();
+  function applyTranslate(px) {
+    track.style.transform = `translateX(calc(${-index * 100}% + ${px}px))`;
+  }
+
+  function goTo(i) {
+    index = Math.max(0, Math.min(i, last));
+    setTransition(true);
+    track.style.transform = `translateX(-${index * 100}%)`;
+    updateNavState();
+  }
+
+  function updateNavState() {
+    const atFirst = index === 0;
+    const atLast = index === last;
+
+    if (prevBtn) {
+      prevBtn.classList.toggle('is-disabled', atFirst);
+      prevBtn.toggleAttribute('disabled', atFirst);
+      prevBtn.setAttribute('aria-disabled', String(atFirst));
+    }
+    if (nextBtn) {
+      nextBtn.classList.toggle('is-disabled', atLast);
+      nextBtn.toggleAttribute('disabled', atLast);
+      nextBtn.setAttribute('aria-disabled', String(atLast));
+    }
+  }
+
+  // 버튼 클릭(드래그와 분리)
+  prevBtn?.addEventListener('click', (e) => {
+    if (prevBtn.hasAttribute('disabled')) return;
+    goTo(index - 1);
+  });
+  nextBtn?.addEventListener('click', (e) => {
+    if (nextBtn.hasAttribute('disabled')) return;
+    goTo(index + 1);
+  });
+
+  function isOnNav(target) {
+    return target && target.closest && target.closest('.nav');
+  }
+
+  // 공통 드래그 시작
+  function dragStart(clientX, target, pointerId) {
+    // 버튼에서 시작하면 드래그 무시 → 버튼 클릭 정상 동작
+    if (isOnNav(target)) return;
+
+    dragging = true;
+    startX = clientX;
+    deltaX = 0;
+    setTransition(false);
+    visual.classList.add('dragging');
+
+    if (pointerId != null && visual.setPointerCapture) {
+      activePointerId = pointerId;
+      visual.setPointerCapture(pointerId);
+    }
+  }
+
+  // 공통 드래그 이동
+  function dragMove(clientX) {
+    if (!dragging) return;
+    deltaX = clientX - startX;
+
+    // 양끝 저항감
+    const atFirst = index === 0 && deltaX > 0;
+    const atLast = index === last && deltaX < 0;
+    const resist = (atFirst || atLast) ? 0.35 : 1;
+    applyTranslate(deltaX * resist);
+  }
+
+  // 공통 드래그 종료
+  function dragEnd() {
+    if (!dragging) return;
+    dragging = false;
+    setTransition(true);
+
+    if (Math.abs(deltaX) > THRESHOLD) {
+      if (deltaX < 0 && index < last) goTo(index + 1);
+      else if (deltaX > 0 && index > 0) goTo(index - 1);
+      else goTo(index);
+    } else {
+      goTo(index);
+    }
+
+    // 포인터 캡처 해제
+    if (activePointerId != null && visual.releasePointerCapture) {
+      try { visual.releasePointerCapture(activePointerId); } catch (_) {}
+      activePointerId = null;
+    }
+
+    deltaX = 0;
+    visual.classList.remove('dragging');
+  }
+
+  // Pointer Events 우선
+  if (window.PointerEvent) {
+    visual.addEventListener('pointerdown', (e) => {
+      // 마우스: 좌클릭만, 터치/펜은 허용
+      const isPrimary = (e.pointerType === 'mouse') ? e.button === 0 : true;
+      if (!isPrimary) return;
+      dragStart(e.clientX, e.target, e.pointerId);
+    });
+    visual.addEventListener('pointermove', (e) => dragMove(e.clientX));
+    visual.addEventListener('pointerup', dragEnd);
+    visual.addEventListener('pointercancel', dragEnd);
+    visual.addEventListener('pointerleave', dragEnd);
+  } else {
+    // 마우스 폴백
+    visual.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      dragStart(e.clientX, e.target, null);
+      // e.preventDefault(); // 필요 시만 사용(텍스트 선택 방지 등)
+    });
+    window.addEventListener('mousemove', (e) => dragMove(e.clientX));
+    window.addEventListener('mouseup', dragEnd);
+
+    // 터치 폴백
+    visual.addEventListener('touchstart', (e) => dragStart(e.touches[0].clientX, e.target, null), { passive: true });
+    visual.addEventListener('touchmove', (e) => dragMove(e.touches[0].clientX), { passive: true });
+    visual.addEventListener('touchend', dragEnd);
+    visual.addEventListener('touchcancel', dragEnd);
+  }
+
+  // 초기화
+  goTo(0);
+})();

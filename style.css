@@ -307,37 +307,75 @@ body a {
 }
 
 .cafe-visual {
+  position: relative;
   width: 100%;
   height: auto;
   margin-bottom: 60px;
   font-size: 0;
-}
-
-.cafe-visual img{
-  width: 100%;
-  height: auto;
-}
-
-.cafe-visual .slider {
-  width: 100%;
   overflow: hidden;
-  /* cursor: grab; */
-  position: relative;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-y;
+  cursor: grab;
 }
 
 .cafe-visual .slider-track {
   display: flex;
-  transition: transform 0.3s ease;
-  align-items: center;
+  width: 100%;
+  transition: transform 0.4s ease;
+  will-change: transform;
 }
 
 .cafe-visual .slider-track img {
-  width: auto;
-  height: 100%;
-  flex-shrink: 0;
-  margin-right: 20px;
+  width: 100%;
+  height: auto;
+  flex: 0 0 100%;
+  object-fit: cover;
+  -webkit-user-drag: none;
   user-select: none;
-  pointer-events: none;
+  pointer-events: auto;
+}
+
+.cafe-visual .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: #BF8F60;
+  color: #FFE4BF;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: border-radius 0.15s ease;
+}
+
+.cafe-visual .nav.prev {
+  left: 10px;
+}
+
+.cafe-visual .nav.next {
+  right: 10px;
+}
+
+.cafe-visual .nav:not(.is-disabled):hover,
+.cafe-visual .nav:not([disabled]):hover {
+  border-radius: 40px;
+}
+
+.cafe-visual .nav.is-disabled,
+.cafe-visual .nav[disabled] {
+  background: rgba(191,143,96,.6);
+  color: rgba(255,228,191,.6);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cafe-visual.dragging,
+.cafe-visual:active {
+  cursor: grabbing;
 }
 
 .cafe-contents {
@@ -462,6 +500,18 @@ body a {
 
 .gallery-background .header li:hover path {
   fill: #F5F5F7;
+}
+
+.gallery-visual {
+  width: 100%;
+  height: auto;
+  margin-bottom: 60px;
+  font-size: 0;
+}
+
+.gallery-visual img {
+  width: 100%;
+  height: auto;
 }
 
 .gallery-contents {
@@ -1083,7 +1133,7 @@ ul li.insta::before {
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g clip-path='url(%23clip0_1593_568)'><path d='M7 7H14M14 7V14M14 7L7 14' stroke='%23482D80' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></g><defs><clipPath id='clip0_1593_568'><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'><g clip-path='url(%23clip0_1593_568)'><path d='M7 7H14M14 7V14M14 7L7 14' stroke='%23482D80' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></g><defs><clipPath id='clip0_1593_568'><rect width='20' height='20' fill='white'/></clipPath></defs></svg>");
 }
 
 @media (max-width: 720px) {
