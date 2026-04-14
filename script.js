@@ -308,33 +308,45 @@ link.addEventListener('click', function(e) {
   }
 
   // Pointer Events 우선
-  if (window.PointerEvent) {
-    visual.addEventListener('pointerdown', (e) => {
-      // 마우스: 좌클릭만, 터치/펜은 허용
-      const isPrimary = (e.pointerType === 'mouse') ? e.button === 0 : true;
-      if (!isPrimary) return;
-      dragStart(e.clientX, e.target, e.pointerId);
-    });
-    visual.addEventListener('pointermove', (e) => dragMove(e.clientX));
-    visual.addEventListener('pointerup', dragEnd);
-    visual.addEventListener('pointercancel', dragEnd);
-    visual.addEventListener('pointerleave', dragEnd);
-  } else {
-    // 마우스 폴백
-    visual.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      dragStart(e.clientX, e.target, null);
-      // e.preventDefault(); // 필요 시만 사용(텍스트 선택 방지 등)
-    });
-    window.addEventListener('mousemove', (e) => dragMove(e.clientX));
-    window.addEventListener('mouseup', dragEnd);
+if (window.PointerEvent) {
+  visual.addEventListener('pointerdown', (e) => {
+    const isPrimary = (e.pointerType === 'mouse') ? e.button === 0 : true;
+    if (!isPrimary) return;
+    dragStart(e.clientX, e.target, e.pointerId);
+  });
+  visual.addEventListener('pointermove', (e) => dragMove(e.clientX));
+  visual.addEventListener('pointerup', dragEnd);
+  visual.addEventListener('pointercancel', dragEnd);
+  // pointerleave는 캡처 미사용 상황에서만 필요
+  visual.addEventListener('pointerleave', () => {
+    // 캡처가 없고 드래깅 중일 때만 종료
+    // activePointerId는 클로저 변수(기존 코드)
+    if (!activePointerId && dragging) dragEnd();
+  });
+} else {
+  // 마우스 폴백
+  visual.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return;
+    dragStart(e.clientX, e.target, null);
+  });
+  window.addEventListener('mousemove', (e) => dragMove(e.clientX));
+  window.addEventListener('mouseup', dragEnd);
 
-    // 터치 폴백
-    visual.addEventListener('touchstart', (e) => dragStart(e.touches[0].clientX, e.target, null), { passive: true });
-    visual.addEventListener('touchmove', (e) => dragMove(e.touches[0].clientX), { passive: true });
-    visual.addEventListener('touchend', dragEnd);
-    visual.addEventListener('touchcancel', dragEnd);
-  }
+  // 터치 폴백: passive:false로 변경
+  visual.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) return; // 멀티터치 방지
+    dragStart(e.touches[0].clientX, e.target, null);
+  }, { passive: true }); // start는 passive여도 무관
+
+  visual.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    e.preventDefault(); // 수평 드래그 중 스크롤 방지
+    dragMove(e.touches[0].clientX);
+  }, { passive: false });
+
+  visual.addEventListener('touchend', dragEnd);
+  visual.addEventListener('touchcancel', dragEnd);
+}
 
   // 초기화
   goTo(0);

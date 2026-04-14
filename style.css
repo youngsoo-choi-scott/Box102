@@ -63,6 +63,7 @@ body a {
   position: relative;
   width: 100%;
   height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -73,6 +74,7 @@ body a {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: center;
   z-index: -1;
 }
 
@@ -336,6 +338,19 @@ body a {
   pointer-events: auto;
 }
 
+.cafe-visual.mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .cafe-visual.desktop {
+    display: none;
+  }
+  .cafe-visual.mobile {
+    display: block;
+  }
+}
+
 .cafe-visual .nav {
   position: absolute;
   top: 50%;
@@ -477,10 +492,10 @@ body a {
     width: 200%;
   }
 
-  .cafe-visual img {
+  /* .cafe-visual img {
     aspect-ratio: 4 / 3;
     object-fit: cover;
-  }
+  } */
 
   .cafe-visual.mb0 {
     margin-bottom: 20px;
@@ -512,6 +527,19 @@ body a {
 .gallery-visual img {
   width: 100%;
   height: auto;
+}
+
+.gallery-visual img.mobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .gallery-visual img.desktop {
+    display: none;
+  }
+  .gallery-visual img.mobile {
+    display: block;
+  }
 }
 
 .gallery-contents {
@@ -823,9 +851,9 @@ body a {
     width: 100%;
   }
 
-  .gallery-title span {
+  /* .gallery-title span {
     display: inline-block;
-  }
+  } */
 
   .gallery-text {
     width: 100%;
@@ -854,6 +882,10 @@ body a {
 
   .gallery-list-item ul li.title {
     font-size: 22px;
+  }
+
+  .gallery-list-item ul li.thumbnail p {
+    font-size: 18px;
   }
 
   .gallery-list-item ul li.name,
@@ -1233,7 +1265,7 @@ ul li.insta::before {
 .navbar .hamburger span {
   display: block;
   height: 2px;
-  background-color: #ffffff;
+  background-color: #FFE4BF;
 }
 
 .navbar.active {
