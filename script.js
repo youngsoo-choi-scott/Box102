@@ -9,6 +9,42 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
 
+// video 자동재생
+window.addEventListener('DOMContentLoaded', () => {
+  const v = document.querySelector('.background-video');
+  if (!v) return;
+
+  // iOS Safari 자동 재생 안정화를 위한 속성 보강
+  v.muted = true;
+  v.playsInline = true;
+
+  const playSafe = () => {
+    v.play().catch(() => {
+      // TODO: 자동 재생 실패 시 폴백 UI 표시(예: 재생 버튼 노출)
+      // document.querySelector('.play-btn')?.classList.remove('hidden');
+    });
+  };
+
+  // 준비 상태에 따라 재생 시도
+  if (v.readyState >= 3) {
+    playSafe();
+  } else {
+    v.addEventListener('canplay', playSafe, { once: true });
+  }
+
+  // iOS: 첫 터치 시 재시도
+  document.addEventListener('touchstart', playSafe, { once: true });
+
+  // 탭 복귀(백그라운드→포그라운드) 시 재시도
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && v.paused) {
+      playSafe();
+    }
+  });
+});
+
+
+
   // 탭 메뉴 기능
   const tabs = document.querySelectorAll('.tab-menu li');
   const contents = document.querySelectorAll('.tab-content');
