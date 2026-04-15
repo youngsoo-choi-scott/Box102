@@ -9,39 +9,33 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
 
-// video 자동재생
+
+// 배경 동영상 자동 재생
 window.addEventListener('DOMContentLoaded', () => {
   const v = document.querySelector('.background-video');
-  if (!v) return;
-
-  // iOS Safari 자동 재생 안정화를 위한 속성 보강
+  const btn = document.querySelector('.video-play-btn');
+  if (!v || !btn) return;// iOS 안정화 속성
   v.muted = true;
-  v.playsInline = true;
-
-  const playSafe = () => {
-    v.play().catch(() => {
-      // TODO: 자동 재생 실패 시 폴백 UI 표시(예: 재생 버튼 노출)
-      // document.querySelector('.play-btn')?.classList.remove('hidden');
-    });
+  v.playsInline = true;const showBtn = () => btn.classList.remove('hidden');
+  const hideBtn = () => btn.classList.add('hidden');const playSafe = () => {
+  v.play().then(hideBtn).catch(showBtn);
   };
 
-  // 준비 상태에 따라 재생 시도
+  // 초기 자동 재생 시도
   if (v.readyState >= 3) {
-    playSafe();
+  playSafe();
   } else {
-    v.addEventListener('canplay', playSafe, { once: true });
+  v.addEventListener('canplay', playSafe, { once: true });
   }
 
-  // iOS: 첫 터치 시 재시도
-  document.addEventListener('touchstart', playSafe, { once: true });
-
-  // 탭 복귀(백그라운드→포그라운드) 시 재시도
+  // 버튼 클릭으로 재생
+  btn.addEventListener('click', playSafe);// 첫 터치나 앱 복귀 시 재시도
+  document.addEventListener('touchstart', () => playSafe(), { once: true });
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && v.paused) {
-      playSafe();
-    }
+  if (document.visibilityState === 'visible' && v.paused) playSafe();
   });
 });
+
 
 
 
