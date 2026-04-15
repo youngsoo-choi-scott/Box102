@@ -1227,6 +1227,10 @@ ul li.insta::before {
     height: 32px;
   }
 
+  .another-text ul li.web .mo {
+    display: none;
+  }
+
   .another-text ul li a p {
     white-space: nowrap;
     overflow: hidden;
